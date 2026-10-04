@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+export const prerender = true;
+---
+
+<Layout title="A little lost?"
+  ><section class="closing-section wrap">
+    <Icon name="bee" size={50} /><span class="eyebrow"
+      >404 · A little detour</span
+    ><h1>Let’s find your<br /><em>honey path.</em></h1><p>
+      That page has wandered away. There’s still plenty to explore.
+    </p><a class="button" href="/shop"
+      >Back to the good stuff <Icon name="arrow" /></a
+    >
+  </section></Layout
+>

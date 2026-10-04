@@ -1,0 +1,138 @@
+---
+import "../styles/global.css";
+import "@fontsource/dm-sans/400.css";
+import "@fontsource/dm-sans/500.css";
+import "@fontsource/dm-sans/600.css";
+import "@fontsource/fraunces/400.css";
+import "@fontsource/fraunces/400-italic.css";
+import Icon from "../components/Icon.astro";
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+const {
+  title = "Little things. Big personality.",
+  description = "Handmade earrings, original stickers, and art prints by Joe and Saris. A little unexpected, a lot of heart. Welcome to Honey Path Designs.",
+  image = "/images/8851b74455106131dcf67508d5a8f556.jpg",
+} = Astro.props;
+const path = Astro.url.pathname;
+const links = [
+  { href: "/", name: "Home" },
+  { href: "/shop", name: "The shop" },
+  { href: "/about", name: "Our story" },
+  { href: "/blog", name: "The buzz" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /><meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <title>{title} | Honey Path Designs</title><meta
+      name="description"
+      content={description}
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <meta property="og:title" content={`${title} | Honey Path Designs`} /><meta
+      property="og:description"
+      content={description}
+    /><meta property="og:type" content="website" /><meta
+      property="og:image"
+      content={new URL(image, Astro.site)}
+    />
+    <meta name="theme-color" content="#f8f6ed" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="announcement">
+      A little unexpected. A lot of heart. <span>Handmade in Colorado.</span>
+      <Icon name="bee" size={17} />
+    </div>
+    <header class="site-header wrap">
+      <a href="/" class="brand" aria-label="Honey Path Designs home"
+        ><Icon name="bee" size={37} /><span
+          >honey paths<small>HANDMADE · HEARTFELT · A LITTLE DIFFERENT</small
+          ></span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class:list={{
+                active:
+                  link.href === "/" ? path === "/" : path.startsWith(link.href),
+              }}
+              aria-current={
+                (link.href === "/" ? path === "/" : path.startsWith(link.href))
+                  ? "page"
+                  : undefined
+              }
+            >
+              {link.name}
+            </a>
+          ))
+        }
+      </nav>
+      <a
+        class="header-social"
+        href="https://www.instagram.com/honeypaths/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="HoneyPaths on Instagram"><Icon name="instagram" /></a
+      >
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap footer-top">
+        <div>
+          <a class="brand" href="/"
+            ><Icon name="bee" size={32} /><span
+              >honey paths<small>A LITTLE UNEXPECTED. A LOT OF HEART.</small
+              ></span
+            ></a
+          ><p>
+            Little things, made with love.<br />From our Colorado hive to yours.
+          </p>
+        </div>
+        <div>
+          <span class="eyebrow">Take a wander</span><a href="/shop"
+            >Shop all the good stuff</a
+          ><a href="/about">Meet Joe & Saris</a><a href="/blog"
+            >Read the latest buzz</a
+          >
+        </div>
+        <div>
+          <span class="eyebrow">Find our hive</span><a
+            href="https://www.instagram.com/honeypaths/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Instagram <Icon name="external" size={14} /></a
+          ><a
+            href="https://www.etsy.com/shop/Honeypaths"
+            target="_blank"
+            rel="noopener noreferrer">Etsy <Icon name="external" size={14} /></a
+          ><a
+            href="https://honeypaths.mayhem.my/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Mayhem Market <Icon name="external" size={14} /></a
+          >
+        </div>
+      </div>
+      <div class="wrap footer-bottom">
+        <span>© {new Date().getFullYear()} Honey Path Designs</span><span
+          >Made by people. For people. <Icon name="heart" size={13} /></span
+        ><a href="/shop"
+          >Follow your honey path <Icon name="arrow" size={15} /></a
+        >
+      </div>
+    </footer>
+  </body>
+</html>

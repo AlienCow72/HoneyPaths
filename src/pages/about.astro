@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+export const prerender = true;
+---
+
+<Layout
+  title="Meet Joe & Saris"
+  description="Meet Joe and Saris, the Colorado makers behind Honey Path Designs. Original art, handmade earrings, and unexpected finds with a second life."
+>
+  <section class="page-intro wrap">
+    <span class="eyebrow">The people behind the little things</span><h1>
+      Two makers.<br /><em>One happy hive.</em>
+    </h1><p>Hi, we’re Joe and Saris. It’s lovely to meet you.</p>
+  </section>
+  <section class="story-section wrap about-story">
+    <div class="story-photo">
+      <img
+        src="/images/8851b74455106131dcf67508d5a8f556.jpg"
+        alt="Joe and Saris together"
+        width="639"
+        height="799"
+      /><span class="photo-label">Joe + Saris. Hearts + hands.</span><span
+        class="photo-flower"><Icon name="flower" size={76} /></span
+      >
+    </div><div class="story-copy">
+      <span class="eyebrow">Midwestern roots. Colorado hearts.</span><h2>
+        Following our<br /><em>own honey path.</em>
+      </h2><p>
+        We’re a husband-and-wife duo originally from the Midwest, now living in
+        Colorado with our kiddo, our two amazing partners, and our dog.
+      </p><p>
+        Honey Path Designs is where our creative worlds meet. Saris makes our
+        stickers, art prints, and graphic design elements. Joe creates our
+        earrings and key chains, mostly from materials found at closing stores
+        and garage sales.
+      </p><p>
+        We love a piece with personality. A familiar character, an unexpected
+        material, a little color that makes your day. That’s what you’ll find in
+        our hive.
+      </p>
+    </div>
+  </section>
+  <section class="section wrap">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Different hands. The same heart.</span><h2>
+          A little of <em>both of us.</em>
+        </h2>
+      </div>
+    </div><div class="maker-grid">
+      <article class="maker-card tint-1">
+        <span class="eyebrow">The illustrator</span><h3>Saris</h3><p>
+          Original illustrations, stickers, art prints, and the graphic elements
+          that give Honey Path its personality.
+        </p><a class="text-link" href="/shop?category=Stickers"
+          >Explore the illustrations <Icon name="arrow" /></a
+        ><img
+          src="/images/e33bd90462a89543101e1db311a2cfb5.png"
+          alt="Saris’ playful ghost sticker"
+          width="170"
+          height="210"
+          loading="lazy"
+        />
+      </article><article class="maker-card tint-2">
+        <span class="eyebrow">The maker</span><h3>Joe</h3><p>
+          Handmade earrings and key chains, with a love of upcycling finds from
+          closing stores and garage sales.
+        </p><a class="text-link" href="/shop?category=Earrings"
+          >Explore the earrings <Icon name="arrow" /></a
+        ><img
+          src="/images/ca82980be8d7c4983fb6c906f7406a18.png"
+          alt="Joe’s purple guitar pick earrings"
+          width="170"
+          height="210"
+          loading="lazy"
+        />
+      </article>
+    </div>
+  </section>
+  <section class="closing-section wrap">
+    <Icon name="bee" size={40} /><h2>Welcome to <em>our hive.</em></h2><p>
+      Thanks for being part of our little corner of the world.
+    </p><a class="button" href="/shop"
+      >Find a little something <Icon name="arrow" /></a
+    >
+  </section>
+</Layout>

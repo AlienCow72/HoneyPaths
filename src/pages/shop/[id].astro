@@ -1,0 +1,82 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import products from "../../data/products.json";
+export const prerender = true;
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
+const { product } = Astro.props;
+const related = products
+  .filter((p) => p.category === product.category && p.id !== product.id)
+  .slice(0, 4);
+---
+
+<Layout
+  title={product.name}
+  description={product.description}
+  image={product.image}
+>
+  <div class="wrap">
+    <a class="back-link" href="/shop">← Back to all the good stuff</a><section
+      class="product-detail"
+    >
+      <div class="detail-image tint-0">
+        <img src={product.image} alt={product.name} width="700" height="800" />
+      </div><div class="detail-copy">
+        <span class="eyebrow">{product.category} · Honey Path Designs</span><h1>
+          {product.name}
+        </h1><div class="product-tags">
+          {
+            product.tags.map((tag) => (
+              <a href={`/shop?tag=${encodeURIComponent(tag)}`}>{tag}</a>
+            ))
+          }
+        </div><p>{product.description}</p><a
+          class="button"
+          href={product.shopUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          >View on Mayhem Market <Icon name="external" /></a
+        >{
+          product.etsyUrl && (
+            <a
+              class="button button-outline"
+              href={product.etsyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Shop this item on Etsy <Icon name="external" />
+            </a>
+          )
+        }<p class="detail-note">
+          Find current pricing, options, materials, and availability in the shop
+          listing. Checkout takes place securely with the marketplace.
+        </p><div class="detail-values">
+          <Icon name="heart" size={18} /> Handmade with care <span>·</span> A little
+          different
+        </div><a
+          class="text-link etsy-shop-link"
+          href="https://www.etsy.com/shop/Honeypaths"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Browse our Etsy shop <Icon name="external" size={16} /></a
+        >
+      </div>
+    </section><section class="section">
+      <div class="section-heading">
+        <h2>A little more to <em>love.</em></h2><a
+          class="text-link"
+          href={`/shop?category=${encodeURIComponent(product.category)}`}
+          >More {product.category.toLowerCase()} <Icon name="arrow" /></a
+        >
+      </div><div class="product-grid">
+        {related.map((p, index) => <ProductCard product={p} index={index} />)}
+      </div>
+    </section>
+  </div>
+</Layout>

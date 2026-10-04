@@ -1,0 +1,217 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import products from "../../data/products.json";
+export const prerender = true;
+const tags = [...new Set(products.flatMap((p) => p.tags))];
+---
+
+<Layout
+  title="The shop"
+  description="Explore all Honey Path Designs earrings, stickers, and art prints in one place. Filter by your favorite style and find a little happy."
+>
+  <section class="page-intro wrap">
+    <span class="eyebrow">All the good stuff, in one place</span><h1>
+      Find your kind of <em>happy.</em>
+    </h1><p>
+      A little quirky. A little colorful. Entirely you.<br />Wander through our
+      handmade earrings, stickers, and art.
+    </p>
+  </section>
+  <section class="wrap shop-section" aria-label="Product catalog">
+    <div class="shop-toolbar">
+      <div class="category-filters" aria-label="Filter by product type">
+        <button data-category="All" class="selected" aria-pressed="true"
+          >All the good stuff <span>{products.length}</span></button
+        >{
+          ["Earrings", "Stickers", "Art prints"].map((c) => (
+            <button data-category={c} aria-pressed="false">
+              {c} <span>{products.filter((p) => p.category === c).length}</span>
+            </button>
+          ))
+        }
+      </div><label class="search-field"
+        ><Icon name="search" size={18} /><input
+          id="product-search"
+          type="search"
+          placeholder="Find a little something…"
+          aria-label="Search products"
+        /></label
+      >
+    </div>
+    <div class="tag-filters" aria-label="Filter by style">
+      <span class="filter-label">A little more you:</span><button
+        data-tag="All"
+        class="selected"
+        aria-pressed="true">All styles</button
+      >{
+        tags
+          .filter((t) => !["Earrings", "Stickers", "Art prints"].includes(t))
+          .map((t) => (
+            <button data-tag={t} aria-pressed="false">
+              {t}
+            </button>
+          ))
+      }
+    </div>
+    <div class="results-bar">
+      <p id="product-count" role="status" aria-live="polite">
+        {products.length} little things to love
+      </p><label
+        >Sort by <select id="product-sort" aria-label="Sort products"
+          ><option value="featured">Collection order</option><option value="az"
+            >Name: A to Z</option
+          ><option value="za">Name: Z to A</option></select
+        ></label
+      >
+    </div>
+    <div class="product-grid catalog-grid" id="product-grid">
+      {
+        products.map((product, index) => (
+          <ProductCard product={product} index={index} filterable />
+        ))
+      }
+    </div>
+    <div class="empty-state" id="empty-state" hidden>
+      <Icon name="bee" size={40} /><h2>No little things here just yet.</h2><p>
+        Try another word or give a different style a little love.
+      </p><button class="button" id="reset-filters"
+        >Show everything <Icon name="arrow" /></button
+      >
+    </div>
+    <noscript
+      ><p class="notice">
+        All products are shown below. Turn on JavaScript to search and filter
+        the collection.
+      </p></noscript
+    >
+    <div class="shop-note">
+      <Icon name="heart" size={20} /><p>
+        Every piece has a little story. Select a product for details and its
+        original shop listing.<br /><small
+          >Prices, available options, and checkout are kept up to date on Mayhem
+          Market and Etsy.</small
+        >
+      </p>
+    </div>
+  </section>
+</Layout>
+<script>
+  const grid = document.querySelector<HTMLElement>("#product-grid")!;
+  const cards = Array.from(
+    grid.querySelectorAll<HTMLElement>("[data-product]"),
+  );
+  const input = document.querySelector<HTMLInputElement>("#product-search")!;
+  const sort = document.querySelector<HTMLSelectElement>("#product-sort")!;
+  const count = document.querySelector("#product-count")!;
+  const empty = document.querySelector<HTMLElement>("#empty-state")!;
+  let category = "All";
+  let tag = "All";
+  const validCategories = [
+    "All",
+    ...new Set(cards.map((c) => c.dataset.category!)),
+  ];
+  const validTags = [
+    "All",
+    ...new Set(cards.flatMap((c) => JSON.parse(c.dataset.tags!))),
+  ];
+  function applyFilters() {
+    let visible = 0;
+    for (const card of cards) {
+      const tags: string[] = JSON.parse(card.dataset.tags!);
+      card.hidden =
+        !(category === "All" || card.dataset.category === category) ||
+        !(tag === "All" || tags.includes(tag)) ||
+        !`${card.dataset.name} ${tags.join(" ")}`
+          .toLowerCase()
+          .includes(input.value.trim().toLowerCase());
+      if (!card.hidden) visible++;
+    }
+    const sorted = [...cards].sort((a, b) =>
+      sort.value === "featured"
+        ? Number(a.dataset.index) - Number(b.dataset.index)
+        : (sort.value === "za" ? -1 : 1) *
+          a.dataset.name!.localeCompare(b.dataset.name!),
+    );
+    sorted.forEach((card) => grid.append(card));
+    count.textContent = `${visible} ${visible === 1 ? "little thing" : "little things"} to love`;
+    empty.hidden = visible !== 0;
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-category]")
+      .forEach((b) => {
+        const selected = b.dataset.category === category;
+        b.classList.toggle("selected", selected);
+        b.setAttribute("aria-pressed", String(selected));
+      });
+    document.querySelectorAll<HTMLButtonElement>("[data-tag]").forEach((b) => {
+      const selected = b.dataset.tag === tag;
+      b.classList.toggle("selected", selected);
+      b.setAttribute("aria-pressed", String(selected));
+    });
+    const params = new URLSearchParams();
+    if (category !== "All") params.set("category", category);
+    if (tag !== "All") params.set("tag", tag);
+    if (input.value.trim()) params.set("q", input.value.trim());
+    if (sort.value !== "featured") params.set("sort", sort.value);
+    history.replaceState(
+      null,
+      "",
+      `${location.pathname}${params.size ? "?" + params : ""}`,
+    );
+  }
+  function readUrl() {
+    const params = new URLSearchParams(location.search);
+    category = validCategories.includes(params.get("category") || "")
+      ? params.get("category")!
+      : "All";
+    const requested = params.get("tag") || "All";
+    if (["Earrings", "Stickers", "Art prints"].includes(requested)) {
+      category = requested;
+      tag = "All";
+    } else tag = validTags.includes(requested) ? requested : "All";
+    input.value = params.get("q") || "";
+    sort.value = ["az", "za"].includes(params.get("sort") || "")
+      ? params.get("sort")!
+      : "featured";
+    applyFilters();
+  }
+  document.querySelectorAll<HTMLButtonElement>("[data-category]").forEach((b) =>
+    b.addEventListener("click", () => {
+      category = b.dataset.category!;
+      tag = "All";
+      applyFilters();
+    }),
+  );
+  document.querySelectorAll<HTMLButtonElement>("[data-tag]").forEach((b) =>
+    b.addEventListener("click", () => {
+      tag = b.dataset.tag!;
+      applyFilters();
+    }),
+  );
+  document
+    .querySelectorAll<HTMLAnchorElement>("[data-filter-tag]")
+    .forEach((a) =>
+      a.addEventListener("click", (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        category = "All";
+        tag = a.dataset.filterTag!;
+        applyFilters();
+        document
+          .querySelector(".shop-toolbar")
+          ?.scrollIntoView({ block: "start" });
+      }),
+    );
+  input.addEventListener("input", applyFilters);
+  sort.addEventListener("change", applyFilters);
+  document.querySelector("#reset-filters")!.addEventListener("click", () => {
+    category = "All";
+    tag = "All";
+    input.value = "";
+    sort.value = "featured";
+    applyFilters();
+  });
+  window.addEventListener("popstate", readUrl);
+  readUrl();
+</script>

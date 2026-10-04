@@ -1,0 +1,121 @@
+---
+import Icon from "./Icon.astro";
+const snapshots = [
+  {
+    image: "/images/701621ad5bc6aed6331ddf77ea646902.png",
+    alt: "Tie dyed guitar pick earrings",
+  },
+  {
+    image: "/images/e33bd90462a89543101e1db311a2cfb5.png",
+    alt: "Ghost illustration sticker",
+  },
+  {
+    image: "/images/612a28810a5ef7b5f7b2a54c2db275cb.png",
+    alt: "Unicorn balloon animal earrings",
+  },
+  {
+    image: "/images/8851b74455106131dcf67508d5a8f556.jpg",
+    alt: "Joe and Saris, the makers behind Honey Path Designs",
+  },
+];
+---
+
+<section
+  class="instagram-section section wrap"
+  aria-labelledby="instagram-heading"
+>
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">A peek inside our hive</span><h2
+        id="instagram-heading"
+      >
+        Life on the <em>honey path.</em>
+      </h2>
+    </div><a
+      class="text-link"
+      href="https://www.instagram.com/honeypaths/"
+      target="_blank"
+      rel="noopener noreferrer"
+      ><Icon name="instagram" size={18} /> @honeypaths <Icon
+        name="external"
+        size={18}
+      /></a
+    >
+  </div>
+  <p class="section-intro" id="feed-description">
+    Meet the makers, explore our designs, and follow along on Instagram.
+  </p>
+  <div
+    class="instagram-grid"
+    id="instagram-grid"
+    aria-describedby="feed-description"
+  >
+    {
+      snapshots.map((item, index) => (
+        <a
+          class:list={["instagram-tile", `tint-${index}`]}
+          href="https://www.instagram.com/honeypaths/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <>
+            <img
+              src={item.image}
+              alt={item.alt}
+              width="400"
+              height="400"
+              loading="lazy"
+              class:list={{ photograph: index === 3 }}
+            />
+            <span>
+              <Icon name="instagram" size={20} />
+            </span>
+          </>
+        </a>
+      ))
+    }
+  </div>
+  <p class="feed-note" id="feed-note">
+    From our studio collection · Find our latest posts on Instagram.
+  </p>
+</section>
+<script>
+  const grid = document.querySelector("#instagram-grid");
+  if (grid) {
+    fetch("/api/instagram")
+      .then(async (response) => {
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!Array.isArray(payload.posts) || !payload.posts.length) return;
+        const fragment = document.createDocumentFragment();
+        for (const post of payload.posts.slice(0, 4)) {
+          const link = document.createElement("a");
+          link.className = "instagram-tile live-post";
+          link.href = post.permalink;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          const image = document.createElement("img");
+          image.src = post.image;
+          image.alt =
+            post.caption || "A recent photo from HoneyPaths on Instagram";
+          image.width = 400;
+          image.height = 400;
+          image.loading = "lazy";
+          link.append(image);
+          fragment.append(link);
+        }
+        grid.replaceChildren(fragment);
+        const description = document.querySelector("#feed-description");
+        if (description)
+          description.textContent =
+            "The latest moments, little creations, and everyday inspiration from @honeypaths.";
+        const note = document.querySelector("#feed-note");
+        if (note)
+          note.textContent =
+            "Latest photos from @honeypaths · Updated automatically";
+      })
+      .catch(() => {
+        /* Keep the clearly labeled studio collection if Instagram is unavailable. */
+      });
+  }
+</script>

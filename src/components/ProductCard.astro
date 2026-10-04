@@ -1,0 +1,48 @@
+---
+import Icon from "./Icon.astro";
+import type products from "../data/products.json";
+interface Props {
+  product: (typeof products)[number];
+  index?: number;
+  filterable?: boolean;
+}
+const { product, index = 0, filterable = false } = Astro.props;
+---
+
+<article
+  class="product-card"
+  data-product={filterable ? true : undefined}
+  data-name={product.name.toLowerCase()}
+  data-category={product.category}
+  data-tags={JSON.stringify(product.tags)}
+  data-index={index}
+>
+  <a
+    class:list={["product-image", `tint-${index % 4}`]}
+    href={`/shop/${product.id}`}
+    aria-label={`View ${product.name}`}
+    ><img
+      src={product.image}
+      alt={product.name}
+      loading="lazy"
+      width="600"
+      height="650"
+    /><span class="product-peek"><Icon name="arrow" size={20} /></span></a
+  >
+  <div class="product-meta">
+    <span>{product.category}</span><span>Handmade</span>
+  </div>
+  <h3><a href={`/shop/${product.id}`}>{product.name}</a></h3>
+  <div class="product-tags">
+    {
+      product.tags.slice(1).map((tag) => (
+        <a
+          href={`/shop?tag=${encodeURIComponent(tag)}`}
+          data-filter-tag={filterable ? tag : undefined}
+        >
+          {tag}
+        </a>
+      ))
+    }
+  </div>
+</article>
