@@ -12,7 +12,7 @@
   color: var(--ink);
   background: var(--cream);
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 115%;
   font-synthesis: none;
   scroll-behavior: smooth;
 }
@@ -20,6 +20,7 @@
   box-sizing: border-box;
 }
 body {
+  overflow-wrap: anywhere;
   margin: 0;
 }
 a {
@@ -63,15 +64,15 @@ h3 {
   letter-spacing: -0.045em;
 }
 h1 {
-  font-size: clamp(48px, 5.8vw, 82px);
+  font-size: clamp(3rem, 6.525vw, 5.125rem);
   line-height: 1.07;
 }
 h2 {
-  font-size: clamp(35px, 3.5vw, 49px);
+  font-size: clamp(2.1875rem, 3.9375vw, 3.0625rem);
   line-height: 1.15;
 }
 h3 {
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 em {
@@ -105,7 +106,7 @@ button {
   gap: 10px;
   text-transform: uppercase;
   letter-spacing: 0.17em;
-  font-size: 10px;
+  font-size: 0.7778rem;
   font-weight: 600;
   line-height: 1.7;
 }
@@ -119,7 +120,7 @@ button {
   color: var(--cream);
   padding: 17px 24px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 500;
   transition:
     background 0.2s,
@@ -140,11 +141,11 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 12px;
+  font-size: 0.9444rem;
   font-weight: 500;
   padding-block: 9px;
   border-bottom: 1px solid currentColor;
-  white-space: nowrap;
+  white-space: normal;
 }
 .text-link:hover {
   color: #74845b;
@@ -167,7 +168,7 @@ button {
   align-items: center;
   gap: 7px;
   background: var(--lilac);
-  font-size: 10px;
+  font-size: 0.7778rem;
   letter-spacing: 0.055em;
   padding: 10px;
   text-align: center;
@@ -176,7 +177,8 @@ button {
   margin-left: 8px;
 }
 .site-header {
-  height: 103px;
+  min-height: 103px;
+  padding-block: 20px;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -188,25 +190,28 @@ button {
   gap: 12px;
 }
 .brand > span {
+  min-width: 0;
   font-family: var(--serif);
-  font-size: 31px;
+  font-size: 1.9375rem;
   letter-spacing: -0.07em;
   line-height: 1.1;
 }
 .brand small {
   display: block;
   letter-spacing: 0.135em;
-  font: 500 6.4px var(--sans);
+  max-width: 24ch;
+  font: 500 0.7778rem / 1.5 var(--sans);
   margin-top: 7px;
 }
 .site-header nav {
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   gap: 36px;
   margin-left: auto;
 }
 .site-header nav a {
-  font-size: 12px;
+  font-size: 0.9444rem;
   padding: 12px 0;
   position: relative;
 }
@@ -246,32 +251,34 @@ button {
   margin-bottom: 27px;
 }
 .tiny-star {
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 400;
 }
 .hero h1 {
-  font-size: clamp(54px, 6vw, 85px);
+  font-size: clamp(3.375rem, 6.75vw, 5.3125rem);
   letter-spacing: -0.06em;
 }
 .hero h1 em {
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 .hero-copy p {
-  font-size: 14px;
+  font-size: 1.0556rem;
   line-height: 1.9;
   margin-top: 25px;
 }
 .hero-actions {
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   gap: 27px;
   margin-top: 31px;
 }
 .hero-footnote {
+  flex-wrap: wrap;
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 10px;
+  font-size: 0.7778rem;
   color: var(--muted);
   margin-top: 34px;
 }
@@ -329,14 +336,14 @@ button {
 }
 .collage-number {
   align-self: flex-start;
-  font-size: 7px;
+  font-size: 0.7778rem;
   letter-spacing: 0.14em;
   padding: 13px 12px 0;
 }
 .collage-caption {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 18px;
+  font-size: 1.125rem;
   letter-spacing: -0.03em;
   margin-bottom: 13px;
 }
@@ -370,8 +377,9 @@ button {
   position: absolute;
   left: 1%;
   bottom: 45px;
-  width: 111px;
-  height: 111px;
+  width: 8rem;
+  height: 8rem;
+  padding: 12px;
   border: 1px solid #697258;
   border-radius: 50%;
   background: var(--butter);
@@ -379,14 +387,16 @@ button {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 9px;
+  gap: 4px;
   transform: rotate(-13deg);
   z-index: 4;
   outline: 1px dashed #84916d;
   outline-offset: -7px;
 }
 .hive-stamp span {
-  font-size: 7px;
+  line-height: 1.2;
+  text-align: center;
+  font-size: 0.7778rem;
   letter-spacing: 0.12em;
 }
 .hero-spark {
@@ -397,13 +407,13 @@ button {
 .spark-one {
   right: 40%;
   top: -3px;
-  font-size: 45px;
+  font-size: 2.8125rem;
   transform: rotate(20deg);
 }
 .spark-two {
   left: 0;
   top: 40px;
-  font-size: 32px;
+  font-size: 2rem;
 }
 .art-note {
   position: absolute;
@@ -411,7 +421,7 @@ button {
   left: 16%;
   font-family: var(--serif);
   font-style: italic;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.3;
   transform: rotate(-8deg);
 }
@@ -429,7 +439,7 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 11px;
+  font-size: 0.8889rem;
 }
 .section-heading {
   display: flex;
@@ -496,10 +506,11 @@ button {
   background: var(--butter);
 }
 .product-meta {
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   gap: 5px;
-  font-size: 8px;
+  font-size: 0.7778rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-top: 20px;
@@ -507,7 +518,7 @@ button {
 }
 .product-card h3 {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0;
   margin: 8px 0 12px;
@@ -523,7 +534,7 @@ button {
   flex-wrap: wrap;
 }
 .product-tags a {
-  font-size: 9px;
+  font-size: 0.7778rem;
   padding: 5px 9px;
   border: 1px solid #39433120;
   border-radius: 20px;
@@ -542,7 +553,7 @@ button {
 .story-photo {
   position: relative;
   background: var(--pink);
-  padding: 13px 13px 50px;
+  padding: 13px 13px 75px;
   transform: rotate(-3deg);
   max-width: 425px;
 }
@@ -553,6 +564,7 @@ button {
   object-position: center 30%;
 }
 .photo-label {
+  line-height: 1.4;
   font-family: var(--serif);
   font-style: italic;
   position: absolute;
@@ -560,7 +572,7 @@ button {
   left: 20px;
   right: 20px;
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .photo-flower {
   position: absolute;
@@ -573,17 +585,17 @@ button {
   margin-bottom: 18px;
 }
 .story-copy h2 {
-  font-size: 58px;
+  font-size: 3.625rem;
 }
 .story-copy p {
-  font-size: 13px;
+  font-size: 1rem;
   margin-top: 22px;
 }
 .story-copy .button {
   margin-top: 27px;
 }
 .section-intro {
-  font-size: 13px;
+  font-size: 1rem;
   margin: -15px 0 30px;
 }
 .instagram-section {
@@ -628,7 +640,7 @@ button {
   border-radius: 50%;
 }
 .feed-note {
-  font-size: 10px;
+  font-size: 0.7778rem;
   margin-top: 15px;
 }
 .buzz-section {
@@ -642,7 +654,7 @@ button {
 }
 .post-preview {
   display: grid;
-  grid-template-columns: 170px 1fr;
+  grid-template-columns: 170px minmax(0, 1fr);
   align-items: center;
   gap: 26px;
 }
@@ -659,18 +671,18 @@ button {
   object-fit: contain;
 }
 .post-preview .eyebrow {
-  font-size: 8px;
+  font-size: 0.7778rem;
 }
 .post-preview h3 {
-  font-size: 27px;
+  font-size: 1.6875rem;
   margin-block: 10px;
 }
 .post-preview p {
-  font-size: 12px;
+  font-size: 0.9444rem;
 }
 .post-preview .text-link {
   margin-top: 13px;
-  font-size: 10px;
+  font-size: 0.7778rem;
 }
 .post-preview:hover h3 {
   text-decoration: underline;
@@ -685,10 +697,10 @@ button {
   gap: 22px;
 }
 .closing-section h2 {
-  font-size: 48px;
+  font-size: 3rem;
 }
 .closing-section p {
-  font-size: 14px;
+  font-size: 1.0556rem;
 }
 .closing-section > .eyebrow {
   margin-top: 8px;
@@ -707,7 +719,7 @@ button {
   padding-bottom: 46px;
 }
 .footer-top p {
-  font-size: 11px;
+  font-size: 0.8889rem;
   margin-top: 20px;
 }
 .footer-top > div:not(:first-child) {
@@ -718,13 +730,13 @@ button {
 }
 .footer-top .eyebrow {
   margin-bottom: 4px;
-  font-size: 9px;
+  font-size: 0.7778rem;
 }
 .footer-top > div > a:not(.brand) {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 0.8889rem;
 }
 .footer-top a:hover {
   text-decoration: underline;
@@ -737,7 +749,7 @@ button {
   align-items: center;
   padding-block: 23px;
   gap: 20px;
-  font-size: 9px;
+  font-size: 0.7778rem;
   color: #666e5b;
 }
 .footer-bottom span:last-of-type,
@@ -754,16 +766,16 @@ button {
   margin-bottom: 21px;
 }
 .page-intro h1 {
-  font-size: clamp(44px, 5.3vw, 72px);
+  font-size: clamp(2.75rem, 5.9625vw, 4.5rem);
 }
 .page-intro p {
-  font-size: 14px;
+  font-size: 1.0556rem;
   margin-top: 22px;
 }
 .page-intro time {
   display: block;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 0.8889rem;
   margin-top: 18px;
 }
 .shop-section {
@@ -786,7 +798,7 @@ button {
 .category-filters button {
   border: 1px solid transparent;
   background: none;
-  font-size: 11px;
+  font-size: 0.8889rem;
   padding: 11px 14px;
   border-radius: 25px;
   display: flex;
@@ -794,7 +806,7 @@ button {
   align-items: center;
 }
 .category-filters button span {
-  font-size: 8px;
+  font-size: 0.7778rem;
   opacity: 0.65;
 }
 .category-filters button.selected {
@@ -818,7 +830,7 @@ button {
   min-width: 0;
   border: 0;
   background: none;
-  font-size: 11px;
+  font-size: 0.8889rem;
   outline-offset: 7px;
 }
 .search-field:focus-within {
@@ -832,7 +844,7 @@ button {
   padding-block: 22px;
 }
 .filter-label {
-  font-size: 10px;
+  font-size: 0.7778rem;
   color: var(--muted);
   margin-right: 5px;
 }
@@ -841,7 +853,7 @@ button {
   background: none;
   border-radius: 20px;
   padding: 7px 11px;
-  font-size: 9px;
+  font-size: 0.7778rem;
 }
 .tag-filters button.selected {
   background: var(--lilac);
@@ -851,6 +863,8 @@ button {
   background: var(--lilac);
 }
 .results-bar {
+  flex-wrap: wrap;
+  gap: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -859,7 +873,7 @@ button {
 .results-bar p,
 .results-bar label,
 .results-bar select {
-  font-size: 10px;
+  font-size: 0.7778rem;
 }
 .results-bar select {
   border: 0;
@@ -888,10 +902,10 @@ button {
   border-top: 1px solid var(--line);
 }
 .shop-note p {
-  font-size: 12px;
+  font-size: 0.9444rem;
 }
 .shop-note small {
-  font-size: 10px;
+  font-size: 0.7778rem;
 }
 .empty-state {
   text-align: center;
@@ -902,10 +916,10 @@ button {
   gap: 20px;
 }
 .empty-state h2 {
-  font-size: 35px;
+  font-size: 2.1875rem;
 }
 .empty-state p {
-  font-size: 13px;
+  font-size: 1rem;
 }
 .notice {
   padding: 20px;
@@ -914,7 +928,7 @@ button {
 .back-link {
   display: inline-flex;
   margin-block: 32px;
-  font-size: 11px;
+  font-size: 0.8889rem;
   gap: 8px;
 }
 .back-link:hover {
@@ -941,19 +955,19 @@ button {
   filter: drop-shadow(0 6px 5px #00000012);
 }
 .detail-copy h1 {
-  font-size: 48px;
+  font-size: 3rem;
   margin-block: 18px 24px;
   line-height: 1.15;
 }
 .detail-copy > p {
-  font-size: 14px;
+  font-size: 1.0556rem;
   margin-block: 26px;
 }
 .detail-copy > .button {
   margin-bottom: 12px;
 }
 .detail-copy .detail-note {
-  font-size: 11px;
+  font-size: 0.8889rem;
   margin-block: 14px 26px;
   max-width: 390px;
 }
@@ -963,11 +977,11 @@ button {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 11px;
+  font-size: 0.8889rem;
 }
 .etsy-shop-link {
   margin-top: 20px;
-  font-size: 11px;
+  font-size: 0.8889rem;
 }
 .about-story {
   padding-top: 20px;
@@ -978,7 +992,7 @@ button {
   height: 480px;
 }
 .about-story .story-copy h2 {
-  font-size: 45px;
+  font-size: 2.8125rem;
 }
 .maker-grid {
   display: grid;
@@ -993,16 +1007,16 @@ button {
   border-radius: 5px;
 }
 .maker-card h3 {
-  font-size: 38px;
+  font-size: 2.375rem;
   margin-top: 12px;
 }
 .maker-card p {
   width: 62%;
-  font-size: 12px;
+  font-size: 0.9444rem;
   margin-top: 15px;
 }
 .maker-card .text-link {
-  font-size: 10px;
+  font-size: 0.7778rem;
   margin-top: 12px;
 }
 .maker-card img {
@@ -1044,15 +1058,15 @@ button {
   align-items: center;
 }
 .blog-meta time {
-  font-size: 10px;
+  font-size: 0.7778rem;
   color: var(--muted);
 }
 .blog-card h2 {
-  font-size: 36px;
+  font-size: 2.25rem;
   margin-block: 15px;
 }
 .blog-card p {
-  font-size: 13px;
+  font-size: 1rem;
 }
 .blog-card > .text-link {
   margin-top: 16px;
@@ -1066,7 +1080,7 @@ button {
   padding-top: 25px;
 }
 .blog-article .page-intro h1 {
-  font-size: 58px;
+  font-size: 3.625rem;
 }
 .article-image {
   height: 420px;
@@ -1085,10 +1099,10 @@ button {
 }
 .prose p {
   margin-bottom: 22px;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .prose h2 {
-  font-size: 34px;
+  font-size: 2.125rem;
   margin-block: 35px 20px;
 }
 .prose a {
@@ -1104,7 +1118,7 @@ button {
     transform: scale(1.06);
   }
   .hero h1 {
-    font-size: 90px;
+    font-size: 5.625rem;
   }
 }
 @media (max-width: 1100px) {
@@ -1112,7 +1126,7 @@ button {
     width: calc(100% - 64px);
   }
   .hero h1 {
-    font-size: 65px;
+    font-size: 4.0625rem;
   }
   .hero {
     min-height: 620px;
@@ -1135,20 +1149,20 @@ button {
     padding-inline: 20px;
   }
   .story-copy h2 {
-    font-size: 50px;
+    font-size: 3.125rem;
   }
   .product-image {
     height: 260px;
   }
   .post-preview {
-    grid-template-columns: 130px 1fr;
+    grid-template-columns: 130px minmax(0, 1fr);
     gap: 18px;
   }
   .post-thumbnail {
     height: 180px;
   }
   .post-preview h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   .catalog-grid .product-image {
     height: 255px;
@@ -1163,7 +1177,7 @@ button {
     gap: 40px;
   }
   .detail-copy h1 {
-    font-size: 40px;
+    font-size: 2.5rem;
   }
 }
 @media (max-width: 850px) {
@@ -1171,17 +1185,19 @@ button {
     width: calc(100% - 40px);
   }
   .site-header {
-    height: 100px;
+    min-height: 100px;
+    height: auto;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
     padding-block: 15px;
   }
   .site-header .brand > span {
-    font-size: 26px;
+    font-size: 1.625rem;
   }
   .site-header .brand svg {
-    width: 30px;
+    width: 48px;
+    height: 48px;
   }
   .site-header nav {
     order: 3;
@@ -1190,7 +1206,7 @@ button {
     gap: 35px;
   }
   .site-header nav a {
-    font-size: 11px;
+    font-size: 0.8889rem;
     padding: 5px;
   }
   .site-header nav a.active::after {
@@ -1209,7 +1225,7 @@ button {
     margin-bottom: 20px;
   }
   .hero h1 {
-    font-size: 70px;
+    font-size: 4.375rem;
   }
   .hero-copy p {
     margin-top: 20px;
@@ -1249,7 +1265,7 @@ button {
     padding-block: 55px;
   }
   .section-heading h2 {
-    font-size: 37px;
+    font-size: 2.3125rem;
   }
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1266,17 +1282,17 @@ button {
     height: 330px;
   }
   .story-copy h2 {
-    font-size: 43px;
+    font-size: 2.6875rem;
   }
   .story-copy p {
-    font-size: 12px;
+    font-size: 0.9444rem;
     margin-top: 17px;
   }
   .story-copy .eyebrow {
-    font-size: 8px;
+    font-size: 0.7778rem;
   }
   .photo-label {
-    font-size: 12px;
+    font-size: 0.9444rem;
   }
   .photo-flower svg {
     width: 55px;
@@ -1300,7 +1316,7 @@ button {
     grid-template-columns: 1fr;
   }
   .post-preview {
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 150px minmax(0, 1fr);
   }
   .post-thumbnail {
     height: 180px;
@@ -1313,13 +1329,14 @@ button {
     grid-template-columns: 1.4fr 1fr 1fr;
   }
   .site-footer .brand > span {
-    font-size: 26px;
+    font-size: 1.625rem;
   }
   .site-footer .brand svg {
-    width: 25px;
+    width: 44px;
+    height: 44px;
   }
   .site-footer .brand small {
-    font-size: 5px;
+    font-size: 0.7778rem;
   }
   .shop-toolbar {
     flex-direction: column;
@@ -1341,16 +1358,16 @@ button {
     gap: 30px;
   }
   .detail-copy h1 {
-    font-size: 35px;
+    font-size: 2.1875rem;
   }
   .detail-copy > p {
-    font-size: 12px;
+    font-size: 0.9444rem;
   }
   .detail-image {
     height: 430px;
   }
   .detail-values {
-    font-size: 9px;
+    font-size: 0.7778rem;
   }
   .about-story {
     gap: 35px;
@@ -1359,7 +1376,7 @@ button {
     height: 380px;
   }
   .about-story .story-copy h2 {
-    font-size: 35px;
+    font-size: 2.1875rem;
   }
   .maker-card {
     padding: 25px;
@@ -1373,7 +1390,7 @@ button {
     height: 160px;
   }
   .maker-card .text-link {
-    font-size: 9px;
+    font-size: 0.7778rem;
     gap: 5px;
   }
   .blog-grid {
@@ -1383,7 +1400,7 @@ button {
     height: 310px;
   }
   .blog-card h2 {
-    font-size: 30px;
+    font-size: 1.875rem;
   }
   .blog-meta {
     flex-direction: column;
@@ -1393,7 +1410,7 @@ button {
 }
 @media (max-width: 580px) {
   .announcement {
-    font-size: 8px;
+    font-size: 0.7778rem;
     gap: 4px;
   }
   .announcement span {
@@ -1403,17 +1420,18 @@ button {
     width: 15px;
   }
   .site-header {
-    height: 111px;
+    min-height: 111px;
+    height: auto;
     padding-block: 17px;
   }
   .site-header .brand > span {
-    font-size: 29px;
+    font-size: 1.8125rem;
   }
   .site-header .brand small {
-    font-size: 5.5px;
+    font-size: 0.7778rem;
   }
   .site-header nav {
-    gap: 32px;
+    gap: 12px;
     margin-top: 5px;
   }
   .header-social {
@@ -1426,17 +1444,17 @@ button {
     padding-top: 38px;
   }
   .hero-copy .eyebrow {
-    font-size: 8px;
+    font-size: 0.7778rem;
   }
   .tiny-star {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
   .hero h1 {
-    font-size: clamp(42px, 11.5vw, 63px);
+    font-size: clamp(2.625rem, 12.9375vw, 3.9375rem);
     letter-spacing: -0.055em;
   }
   .hero-copy p {
-    font-size: 12px;
+    font-size: 0.9444rem;
     margin-top: 20px;
   }
   .desktop-break {
@@ -1449,14 +1467,14 @@ button {
   .hero-actions .button {
     padding: 15px 18px;
     gap: 16px;
-    font-size: 11px;
+    font-size: 0.8889rem;
   }
   .hero-actions .text-link {
-    font-size: 10px;
+    font-size: 0.7778rem;
     gap: 6px;
   }
   .hero-footnote {
-    font-size: 9px;
+    font-size: 0.7778rem;
     gap: 6px;
   }
   .hero-art {
@@ -1481,11 +1499,11 @@ button {
     padding: 14px 15px 5px;
   }
   .collage-number {
-    font-size: 5px;
+    font-size: 0.7778rem;
     padding: 9px 8px 0;
   }
   .collage-caption {
-    font-size: 14px;
+    font-size: 1.0556rem;
     margin-bottom: 9px;
   }
   .collage-sage {
@@ -1509,31 +1527,31 @@ button {
     padding: 8px 16px;
   }
   .hive-stamp {
-    width: 85px;
-    height: 85px;
+    width: 7rem;
+    height: 7rem;
     bottom: 35px;
     left: 0;
-    gap: 7px;
+    gap: 4px;
   }
   .hive-stamp span {
-    font-size: 5px;
+    font-size: 0.7778rem;
   }
   .hive-stamp svg {
     width: 28px;
     height: 28px;
   }
   .hero-art .art-note {
-    font-size: 14px;
+    font-size: 1.0556rem;
     bottom: -8px;
     left: 14%;
   }
   .spark-one {
-    font-size: 33px;
+    font-size: 2.0625rem;
     top: -13px;
     right: 41%;
   }
   .spark-two {
-    font-size: 25px;
+    font-size: 1.5625rem;
     top: 20px;
     left: -5px;
   }
@@ -1543,7 +1561,7 @@ button {
   }
   .values-strip span {
     width: calc(50% - 5px);
-    font-size: 9px;
+    font-size: 0.7778rem;
     gap: 7px;
   }
   .values-strip svg {
@@ -1559,14 +1577,14 @@ button {
     margin-bottom: 27px;
   }
   .section-heading h2 {
-    font-size: 35px;
+    font-size: 2.1875rem;
   }
   .section-heading .eyebrow {
-    font-size: 8px;
+    font-size: 0.7778rem;
     margin-bottom: 10px;
   }
   .section-heading .text-link {
-    font-size: 11px;
+    font-size: 0.8889rem;
   }
   .product-grid {
     gap: 26px 15px;
@@ -1580,18 +1598,18 @@ button {
     height: 84%;
   }
   .product-meta {
-    font-size: 6.5px;
+    font-size: 0.7778rem;
     letter-spacing: 0.08em;
     margin-top: 13px;
   }
   .product-card h3 {
-    font-size: 11px;
+    font-size: 0.8889rem;
     margin-top: 7px;
     margin-bottom: 9px;
     line-height: 1.6;
   }
   .product-tags a {
-    font-size: 7px;
+    font-size: 0.7778rem;
     padding: 4px 7px;
   }
   .product-peek {
@@ -1611,29 +1629,29 @@ button {
   .story-photo {
     width: 85%;
     margin: auto;
-    padding-bottom: 42px;
+    padding-bottom: 70px;
   }
   .story-photo > img {
     height: 360px;
   }
   .photo-label {
-    font-size: 12px;
+    font-size: 0.9444rem;
     bottom: 14px;
   }
   .story-copy {
     padding-inline: 7px;
   }
   .story-copy .eyebrow {
-    font-size: 8px;
+    font-size: 0.7778rem;
   }
   .story-copy h2 {
-    font-size: 48px;
+    font-size: 3rem;
   }
   .story-copy p {
-    font-size: 13px;
+    font-size: 1rem;
   }
   .story-copy .button {
-    font-size: 11px;
+    font-size: 0.8889rem;
   }
   .instagram-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1643,15 +1661,15 @@ button {
     gap: 12px;
   }
   .section-intro {
-    font-size: 12px;
+    font-size: 0.9444rem;
     margin-top: -9px;
     margin-bottom: 20px;
   }
   .feed-note {
-    font-size: 8px;
+    font-size: 0.7778rem;
   }
   .post-preview {
-    grid-template-columns: 115px 1fr;
+    grid-template-columns: 115px minmax(0, 1fr);
     gap: 20px;
   }
   .post-thumbnail {
@@ -1659,23 +1677,23 @@ button {
     border-radius: 55px 55px 4px 4px;
   }
   .post-preview h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   .post-preview p {
-    font-size: 10px;
+    font-size: 0.7778rem;
   }
   .post-preview .text-link {
-    font-size: 9px;
+    font-size: 0.7778rem;
   }
   .closing-section {
     padding-block: 65px;
     gap: 19px;
   }
   .closing-section h2 {
-    font-size: 36px;
+    font-size: 2.25rem;
   }
   .closing-section .button {
-    font-size: 11px;
+    font-size: 0.8889rem;
   }
   .footer-top {
     grid-template-columns: 1fr 1fr;
@@ -1690,7 +1708,7 @@ button {
   .footer-bottom {
     flex-wrap: wrap;
     gap: 15px;
-    font-size: 8px;
+    font-size: 0.7778rem;
   }
   .footer-bottom > a {
     width: 100%;
@@ -1699,14 +1717,14 @@ button {
     padding-block: 45px 35px;
   }
   .page-intro h1 {
-    font-size: 44px;
+    font-size: 2.75rem;
   }
   .page-intro p {
-    font-size: 12px;
+    font-size: 0.9444rem;
     margin-top: 20px;
   }
   .page-intro > .eyebrow {
-    font-size: 8px;
+    font-size: 0.7778rem;
     margin-bottom: 16px;
   }
   .category-filters {
@@ -1715,11 +1733,11 @@ button {
   }
   .category-filters button {
     padding: 10px 11px;
-    font-size: 9px;
+    font-size: 0.7778rem;
     gap: 4px;
   }
   .category-filters button span {
-    font-size: 7px;
+    font-size: 0.7778rem;
   }
   .shop-toolbar {
     padding-block: 18px;
@@ -1734,7 +1752,7 @@ button {
     margin-bottom: 3px;
   }
   .tag-filters button {
-    font-size: 8px;
+    font-size: 0.7778rem;
     padding: 6px 10px;
   }
   .results-bar {
@@ -1743,7 +1761,7 @@ button {
   .results-bar p,
   .results-bar label,
   .results-bar select {
-    font-size: 9px;
+    font-size: 0.7778rem;
   }
   .catalog-grid .product-image {
     height: 220px;
@@ -1757,20 +1775,20 @@ button {
     gap: 10px;
   }
   .shop-note p {
-    font-size: 10px;
+    font-size: 0.7778rem;
     text-align: left;
   }
   .shop-note small {
-    font-size: 9px;
+    font-size: 0.7778rem;
   }
   .empty-state {
     padding: 45px 10px;
   }
   .empty-state h2 {
-    font-size: 30px;
+    font-size: 1.875rem;
   }
   .empty-state p {
-    font-size: 11px;
+    font-size: 0.8889rem;
   }
   .product-detail {
     grid-template-columns: 1fr;
@@ -1781,25 +1799,25 @@ button {
     border-radius: 110px 110px 5px 5px;
   }
   .detail-copy h1 {
-    font-size: 40px;
+    font-size: 2.5rem;
   }
   .detail-copy .product-tags a {
-    font-size: 9px;
+    font-size: 0.7778rem;
   }
   .detail-copy > p {
-    font-size: 13px;
+    font-size: 1rem;
   }
   .detail-values {
-    font-size: 11px;
+    font-size: 0.8889rem;
   }
   .detail-copy .button {
-    font-size: 12px;
+    font-size: 0.9444rem;
   }
   .about-story .story-photo > img {
     height: 400px;
   }
   .about-story .story-copy h2 {
-    font-size: 42px;
+    font-size: 2.625rem;
   }
   .maker-grid {
     grid-template-columns: 1fr;
@@ -1808,11 +1826,11 @@ button {
     padding: 30px;
   }
   .maker-card p {
-    font-size: 12px;
+    font-size: 0.9444rem;
     width: 65%;
   }
   .maker-card .text-link {
-    font-size: 10px;
+    font-size: 0.7778rem;
   }
   .blog-grid {
     grid-template-columns: 1fr;
@@ -1827,10 +1845,10 @@ button {
     align-items: center;
   }
   .blog-card h2 {
-    font-size: 32px;
+    font-size: 2rem;
   }
   .blog-article .page-intro h1 {
-    font-size: 44px;
+    font-size: 2.75rem;
   }
   .article-image {
     height: 340px;
@@ -1839,16 +1857,16 @@ button {
     padding: 30px 10px;
   }
   .prose p {
-    font-size: 14px;
+    font-size: 1.0556rem;
   }
   .prose h2 {
-    font-size: 31px;
+    font-size: 1.9375rem;
   }
   .back-link {
     margin-block: 25px;
   }
   .closing-section h1 {
-    font-size: 45px;
+    font-size: 2.8125rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1863,24 +1881,30 @@ button {
   }
 }
 @media (max-width: 380px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  .site-header .brand {
+    max-width: calc(100% - 48px);
+  }
   .site-header nav {
-    gap: 23px;
+    gap: 12px;
   }
   .site-header nav a {
-    white-space: nowrap;
-    font-size: 10px;
+    white-space: normal;
+    font-size: 0.7778rem;
   }
   .hero-actions {
     gap: 16px;
   }
   .hero-actions .button {
-    white-space: nowrap;
-    font-size: 10px;
+    white-space: normal;
+    font-size: 0.7778rem;
     gap: 13px;
     padding: 15px;
   }
   .hero-actions .text-link {
-    font-size: 9px;
+    font-size: 0.7778rem;
   }
   .art-orbit {
     width: 82%;
