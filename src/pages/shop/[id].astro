@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../lib/paths.mjs";
 import Layout from "../../layouts/Layout.astro";
 import Icon from "../../components/Icon.astro";
 import ProductCard from "../../components/ProductCard.astro";
@@ -22,18 +23,25 @@ const related = products
   image={product.image}
 >
   <div class="wrap">
-    <a class="back-link" href="/shop">← Back to all the good stuff</a><section
-      class="product-detail"
-    >
+    <a class="back-link" href={withBase("/shop")}
+      >← Back to all the good stuff</a
+    ><section class="product-detail">
       <div class="detail-image tint-0">
-        <img src={product.image} alt={product.name} width="700" height="800" />
+        <img
+          src={withBase(product.image)}
+          alt={product.name}
+          width="700"
+          height="800"
+        />
       </div><div class="detail-copy">
         <span class="eyebrow">{product.category} · Honey Path Designs</span><h1>
           {product.name}
         </h1><div class="product-tags">
           {
             product.tags.map((tag) => (
-              <a href={`/shop?tag=${encodeURIComponent(tag)}`}>{tag}</a>
+              <a href={withBase(`/shop?tag=${encodeURIComponent(tag)}`)}>
+                {tag}
+              </a>
             ))
           }
         </div><p>{product.description}</p><a
@@ -71,8 +79,9 @@ const related = products
       <div class="section-heading">
         <h2>A little more to <em>love.</em></h2><a
           class="text-link"
-          href={`/shop?category=${encodeURIComponent(product.category)}`}
-          >More {product.category.toLowerCase()} <Icon name="arrow" /></a
+          href={withBase(
+            `/shop?category=${encodeURIComponent(product.category)}`,
+          )}>More {product.category.toLowerCase()} <Icon name="arrow" /></a
         >
       </div><div class="product-grid">
         {related.map((p, index) => <ProductCard product={p} index={index} />)}

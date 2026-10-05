@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../lib/paths.mjs";
 import Icon from "./Icon.astro";
 import type products from "../data/products.json";
 interface Props {
@@ -19,10 +20,10 @@ const { product, index = 0, filterable = false } = Astro.props;
 >
   <a
     class:list={["product-image", `tint-${index % 4}`]}
-    href={`/shop/${product.id}`}
+    href={withBase(`/shop/${product.id}`)}
     aria-label={`View ${product.name}`}
     ><img
-      src={product.image}
+      src={withBase(product.image)}
       alt={product.name}
       loading="lazy"
       width="600"
@@ -32,12 +33,12 @@ const { product, index = 0, filterable = false } = Astro.props;
   <div class="product-meta">
     <span>{product.category}</span><span>Handmade</span>
   </div>
-  <h3><a href={`/shop/${product.id}`}>{product.name}</a></h3>
+  <h3><a href={withBase(`/shop/${product.id}`)}>{product.name}</a></h3>
   <div class="product-tags">
     {
       product.tags.slice(1).map((tag) => (
         <a
-          href={`/shop?tag=${encodeURIComponent(tag)}`}
+          href={withBase(`/shop?tag=${encodeURIComponent(tag)}`)}
           data-filter-tag={filterable ? tag : undefined}
         >
           {tag}

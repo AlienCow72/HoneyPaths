@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../lib/paths.mjs";
 import Layout from "../../layouts/Layout.astro";
 import Icon from "../../components/Icon.astro";
 import { getCollection } from "astro:content";
@@ -25,10 +26,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
           <>
             <a
               class:list={["blog-image", post.data.tone]}
-              href={`/blog/${post.id}`}
+              href={withBase(`/blog/${post.id}`)}
             >
               <img
-                src={post.data.image}
+                src={withBase(post.data.image)}
                 alt={post.data.imageAlt}
                 width="500"
                 height="400"
@@ -49,10 +50,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
               </>
             </div>
             <h2>
-              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              <a href={withBase(`/blog/${post.id}`)}>{post.data.title}</a>
             </h2>
             <p>{post.data.description}</p>
-            <a class="text-link" href={`/blog/${post.id}`}>
+            <a class="text-link" href={withBase(`/blog/${post.id}`)}>
               Read the story <Icon name="arrow" size={18} />
             </a>
           </>

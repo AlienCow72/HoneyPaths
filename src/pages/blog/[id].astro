@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../../lib/paths.mjs";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 export const prerender = true;
@@ -15,7 +16,7 @@ const { Content } = await render(post);
   description={post.data.description}
   image={post.data.image}
   ><div class="wrap">
-    <a class="back-link" href="/blog">← Back to the buzz</a>
+    <a class="back-link" href={withBase("/blog")}>← Back to the buzz</a>
   </div><article class="blog-article">
     <header class="page-intro">
       <span class="eyebrow">{post.data.category}</span><h1>
@@ -33,7 +34,7 @@ const { Content } = await render(post);
       >
     </header><div class:list={["article-image", post.data.tone]}>
       <img
-        src={post.data.image}
+        src={withBase(post.data.image)}
         alt={post.data.imageAlt}
         width="720"
         height="450"

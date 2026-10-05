@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../lib/paths.mjs";
 import Layout from "../layouts/Layout.astro";
 import Icon from "../components/Icon.astro";
 export const prerender = true;
@@ -10,7 +11,7 @@ export const prerender = true;
       >404 · A little detour</span
     ><h1>Let’s find your<br /><em>honey path.</em></h1><p>
       That page has wandered away. There’s still plenty to explore.
-    </p><a class="button" href="/shop"
+    </p><a class="button" href={withBase("/shop")}
       >Back to the good stuff <Icon name="arrow" /></a
     >
   </section></Layout
