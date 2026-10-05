@@ -12,7 +12,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "new-post": "node scripts/new-post.mjs",
-    "start": "node --env-file-if-exists=.env dist/server/entry.mjs"
+    "start": "node --env-file-if-exists=.env dist/server/entry.mjs",
+    "build:pages": "PUBLIC_PAGES_BUILD=true astro build",
+    "verify:pages": "node scripts/verify-pages.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.6",
@@ -22,9 +24,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.5",
+    "@astrojs/markdown-satteri": "^0.4.2",
     "@types/node": "^24.19.1",
     "prettier": "^3.6.0",
     "prettier-plugin-astro": "^0.14.1",
+    "satteri": "^0.10.5",
     "typescript": "^5.9.0"
   },
   "engines": {

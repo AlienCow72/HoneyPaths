@@ -1,4 +1,5 @@
 ---
+import { withBase, withoutBase } from "../lib/paths.mjs";
 import "../styles/global.css";
 import "@fontsource/dm-sans/400.css";
 import "@fontsource/dm-sans/500.css";
@@ -16,7 +17,7 @@ const {
   description = "Handmade earrings, original stickers, and art prints by Joe and Saris. A little unexpected, a lot of heart. Welcome to Honey Path Designs.",
   image = "/images/8851b74455106131dcf67508d5a8f556.jpg",
 } = Astro.props;
-const path = Astro.url.pathname;
+const path = withoutBase(Astro.url.pathname);
 const links = [
   { href: "/", name: "Home" },
   { href: "/shop", name: "The shop" },
@@ -36,14 +37,14 @@ const links = [
       name="description"
       content={description}
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    <link rel="canonical" href={new URL(withBase(path), Astro.site)} />
     <meta property="og:title" content={`${title} | Honey Path Designs`} /><meta
       property="og:description"
       content={description}
     /><meta property="og:type" content="website" /><meta
       property="og:image"
-      content={new URL(image, Astro.site)}
+      content={new URL(withBase(image), Astro.site)}
     />
     <meta name="theme-color" content="#f8f6ed" />
   </head>
@@ -54,7 +55,7 @@ const links = [
       <Icon name="bee" size={17} />
     </div>
     <header class="site-header wrap">
-      <a href="/" class="brand" aria-label="Honey Path Designs home"
+      <a href={withBase("/")} class="brand" aria-label="Honey Path Designs home"
         ><Icon name="bee" size={64} /><span
           >honey paths<small>HANDMADE · HEARTFELT · A LITTLE DIFFERENT</small
           ></span
@@ -64,7 +65,7 @@ const links = [
         {
           links.map((link) => (
             <a
-              href={link.href}
+              href={withBase(link.href)}
               class:list={{
                 active:
                   link.href === "/" ? path === "/" : path.startsWith(link.href),
@@ -92,7 +93,7 @@ const links = [
     <footer class="site-footer">
       <div class="wrap footer-top">
         <div>
-          <a class="brand" href="/"
+          <a class="brand" href={withBase("/")}
             ><Icon name="bee" size={56} /><span
               >honey paths<small>A LITTLE UNEXPECTED. A LOT OF HEART.</small
               ></span
@@ -102,10 +103,10 @@ const links = [
           </p>
         </div>
         <div>
-          <span class="eyebrow">Take a wander</span><a href="/shop"
+          <span class="eyebrow">Take a wander</span><a href={withBase("/shop")}
             >Shop all the good stuff</a
-          ><a href="/about">Meet Joe & Saris</a><a href="/blog"
-            >Read the latest buzz</a
+          ><a href={withBase("/about")}>Meet Joe & Saris</a><a
+            href={withBase("/blog")}>Read the latest buzz</a
           >
         </div>
         <div>
@@ -129,7 +130,7 @@ const links = [
       <div class="wrap footer-bottom">
         <span>© {new Date().getFullYear()} Honey Path Designs</span><span
           >Made by people. For people. <Icon name="heart" size={13} /></span
-        ><a href="/shop"
+        ><a href={withBase("/shop")}
           >Follow your honey path <Icon name="arrow" size={15} /></a
         >
       </div>

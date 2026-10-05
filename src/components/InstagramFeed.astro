@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../lib/paths.mjs";
 import Icon from "./Icon.astro";
 const snapshots = [
   {
@@ -60,7 +61,7 @@ const snapshots = [
         >
           <>
             <img
-              src={item.image}
+              src={withBase(item.image)}
               alt={item.alt}
               width="400"
               height="400"
@@ -80,9 +81,10 @@ const snapshots = [
   </p>
 </section>
 <script>
+  import { withBase } from "../lib/paths.mjs";
   const grid = document.querySelector("#instagram-grid");
-  if (grid) {
-    fetch("/api/instagram")
+  if (grid && import.meta.env.PUBLIC_PAGES_BUILD !== "true") {
+    fetch(withBase("/api/instagram"))
       .then(async (response) => {
         if (!response.ok) return;
         const payload = await response.json();

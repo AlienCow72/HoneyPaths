@@ -12,8 +12,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -26,19 +26,23 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 24.x
-          cache: 'npm'
+          cache: "npm"
 
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v6
 
       - name: Install dependencies
         run: npm ci
 
       - name: Validate source
-        run: npm run lint && npm run prettier
+        run: npm run check && npm test && npm run format:check
 
-      - name: Build Astro
-        run: npm run build
+      - name: Build static site for Pages
+        env:
+          PAGES_SITE: ${{ steps.pages.outputs.origin }}
+          PAGES_BASE: ${{ steps.pages.outputs.base_path }}
+        run: npm run build:pages && npm run verify:pages
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
@@ -46,6 +50,7 @@ jobs:
           path: ./dist
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

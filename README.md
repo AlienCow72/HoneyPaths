@@ -21,7 +21,17 @@ npm run build
 npm start
 ```
 
-The production build uses the Astro Node standalone adapter. Most pages are prerendered; the Instagram endpoint runs on the server. Set `HOST=127.0.0.1 PORT=4321` when testing the production server locally. Public deployment needs a Node-capable host and HTTPS. This project has not been deployed and does not modify the existing website.
+The default `npm run build` uses the Astro Node standalone adapter. Most pages are prerendered; the Instagram endpoint runs on the server. Set `HOST=127.0.0.1 PORT=4321` when testing the production server locally. This mode needs a Node-capable host and HTTPS.
+
+## GitHub Pages deployment
+
+`npm run build:pages` creates static output in `dist`; `npm run verify:pages` checks generated local links/assets, canonical URLs, redirects, and the Instagram fallback. The default Pages target is `https://kyleanderson.online/HoneyPaths/`. Override `PAGES_SITE` (origin) and `PAGES_BASE` (path, or an empty string for a root site) for another target. Keep the same values for build and verification.
+
+The deployment workflow obtains the current origin and base path from `actions/configure-pages`, runs Astro checks, tests, and formatting validation, builds the static site, verifies the artifact, and deploys on pushes to `main` or manual dispatch from `main`. Repository Settings → Pages must use GitHub Actions. The pull-request workflow validates both Node and Pages builds without deploying.
+
+Pages cannot execute the Instagram server endpoint or refresh expiring Instagram image URLs. The Pages build keeps the clearly labeled studio collection and Instagram profile link, skips the client feed request, and emits only an empty, unconfigured feed response. It does not read Instagram credentials at build time. Use the Node build for the authorized automatic feed.
+
+Local navigation, product images, icons, metadata, legacy redirects, and Markdown links respect the deployment base path. Use `withBase` from `src/lib/paths.mjs` for new local paths in Astro components and browser scripts; Markdown links are prefixed by the configured Markdown plugin. Do not hard-code `/HoneyPaths` in content.
 
 ## Products and Etsy matches
 

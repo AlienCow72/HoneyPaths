@@ -3,6 +3,12 @@ import { createInstagramFeed } from "../../lib/instagram.mjs";
 export const prerender = false;
 const getFeed = createInstagramFeed();
 export const GET: APIRoute = async () => {
+  // Pages cannot run the feed or refresh expiring media URLs. Never read credentials here.
+  if (import.meta.env.PUBLIC_PAGES_BUILD === "true") {
+    return new Response(JSON.stringify({ posts: [], status: "unconfigured" }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
   const feed = await getFeed({
     token:
       process.env.INSTAGRAM_ACCESS_TOKEN ||
