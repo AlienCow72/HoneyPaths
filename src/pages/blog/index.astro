@@ -13,9 +13,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   title="The buzz"
   description="Announcements, studio stories, and a little inspiration from Honey Path Designs."
   ><section class="page-intro wrap">
-    <span class="eyebrow">Notes from our little corner</span><h1>
-      What’s the <em>buzz?</em>
-    </h1><p>
+    <h1>What’s the buzz?</h1><p>
       Studio stories, announcements, and all the little things<br />we’re
       excited to share with you.
     </p>
@@ -38,7 +36,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
             </a>
             <div class="blog-meta">
               <>
-                <span class="eyebrow">{post.data.category}</span>
+                <span class="content-note">{post.data.category}</span>
                 <time datetime={post.data.date.toISOString()}>
                   {post.data.date.toLocaleDateString("en-US", {
                     timeZone: "UTC",

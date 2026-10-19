@@ -19,10 +19,11 @@ const { Content } = await render(post);
     <a class="back-link" href={withBase("/blog")}>← Back to the buzz</a>
   </div><article class="blog-article">
     <header class="page-intro">
-      <span class="eyebrow">{post.data.category}</span><h1>
+      <h1>
         {post.data.title}
-      </h1><p>{post.data.description}</p><time
-        datetime={post.data.date.toISOString()}
+      </h1><p class="content-note">{post.data.category}</p><p>
+        {post.data.description}
+      </p><time datetime={post.data.date.toISOString()}
         >{
           post.data.date.toLocaleDateString("en-US", {
             timeZone: "UTC",

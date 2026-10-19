@@ -1,0 +1,100 @@
+---
+import { withBase } from "../lib/paths.mjs";
+import Icon from "./Icon.astro";
+import products from "../data/products.json";
+const pieces = [products[46], products[27], products[43], products[10]];
+---
+
+<div class="feature-browser" data-feature-browser>
+  <div
+    class="feature-controls"
+    role="group"
+    aria-label="Choose a piece to preview"
+    hidden
+  >
+    {
+      pieces.map((piece, index) => (
+        <button
+          type="button"
+          data-piece={index}
+          aria-pressed={index === 0 ? "true" : "false"}
+          aria-controls={`piece-${piece.id}`}
+        >
+          <>
+            <span>{piece.name}</span>
+            <Icon name="arrow" size={22} />
+          </>
+        </button>
+      ))
+    }
+  </div>
+  <div class="feature-products">
+    {
+      pieces.map((piece, index) => (
+        <article
+          id={`piece-${piece.id}`}
+          class={`feature-piece tint-${index}`}
+          data-piece-panel
+        >
+          <a
+            class="feature-image"
+            href={withBase(`/shop/${piece.id}`)}
+            aria-label={`View ${piece.name}`}
+          >
+            <img
+              class:list={{
+                "padded-art": piece.id === "nsync-inspired-bi-bi-bi-sticker",
+              }}
+              src={withBase(piece.image)}
+              alt={piece.name}
+              width="650"
+              height="650"
+              loading="lazy"
+            />
+          </a>
+          <div class="feature-caption">
+            <div>
+              <>
+                <h3>{piece.name}</h3>
+                <p>{piece.category}</p>
+              </>
+            </div>
+            <a class="text-link" href={withBase(`/shop/${piece.id}`)}>
+              View piece <Icon name="arrow" />
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <p class="sr-only" role="status" data-piece-status></p>
+</div>
+<script>
+  const browser = document.querySelector<HTMLElement>("[data-feature-browser]");
+  if (browser) {
+    const controls = browser.querySelector<HTMLElement>(".feature-controls")!;
+    const buttons = [
+      ...controls.querySelectorAll<HTMLButtonElement>("[data-piece]"),
+    ];
+    const panels = [
+      ...browser.querySelectorAll<HTMLElement>("[data-piece-panel]"),
+    ];
+    const status = browser.querySelector<HTMLElement>("[data-piece-status]")!;
+    const choose = (index: number, announce = true) => {
+      panels.forEach((panel, i) => {
+        panel.hidden = i !== index;
+      });
+      buttons.forEach((button, i) =>
+        button.setAttribute("aria-pressed", String(i === index)),
+      );
+      if (announce)
+        status.textContent = `Previewing ${buttons[index].querySelector("span")!.textContent}`;
+    };
+    buttons.forEach((button, index) =>
+      button.addEventListener("click", () => choose(index)),
+    );
+    choose(0, false);
+    controls.hidden = false;
+    browser.classList.add("is-enhanced");
+  }
+</script>

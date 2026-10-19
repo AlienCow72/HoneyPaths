@@ -4,5 +4,10 @@
   "instagram": "https://www.instagram.com/honeypaths/",
   "etsy": "https://www.etsy.com/shop/Honeypaths",
   "etsyMatchingStatus": "Blocked by Etsy device verification; no individual Etsy matches asserted.",
-  "productCount": 57
+  "productCount": 57,
+  "designReference": {
+    "url": "https://honeypaths.com/",
+    "reviewed": "2026-10-18",
+    "notes": "Pastel rainbow background and loose, playful presentation inform the redesign. The rainbow background is recreated in CSS; original product assets remain unchanged."
+  }
 }
